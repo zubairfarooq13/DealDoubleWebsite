@@ -1,0 +1,60 @@
+﻿@model List<DealDouble.Entities.Auction>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div id="listingArea">
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Actual Price</th>
+                <th>Starting Time</th>
+                <th>Ending Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var auction in Model)
+            {
+                <tr>
+                    <td>@auction.Title</td>
+
+                    <td>@auction.Description</td>
+
+                    <td>@auction.ActualPrice</td>
+
+                    <td>@auction.StartingTime</td>
+
+                    <td>@auction.EndTime</td>
+
+                    <td><a href="Delete/@auction.ID">Delete</a></td>
+
+                    <td><a id="editBtn" href="Edit/@auction.ID">Edit</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button id="createBtn">Create Auction</button>
+    <div id="contentArea">
+
+    </div>
+    <script>
+        $("#createBtn").click(function () {
+            $.ajax({
+                url: "/Auctions/Create",
+                method: "get"
+            }).done(function (response) {
+
+                $("#contentArea").html(response);
+            })
+        });
+
+       
+    </script>
+</div>
+
+
+

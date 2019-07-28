@@ -1,0 +1,14 @@
+﻿@model DealDouble.Entities.Auction
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Are you sure to Delete that Auction?</h2>
+<form method="post">
+    <input type="hidden" name="ID" value="@Model.ID" />
+    <button>Yes</button>   
+</form>
+<form method="get" action="/Auctions/">
+    <button>No</button>
+</form>
+

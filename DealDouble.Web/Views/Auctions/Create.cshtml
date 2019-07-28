@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create New Auction</h2>
+
+<form id="createForm" method="post" action="/Auctions/Create">
+    <label>Auction Tite</label>
+    <input type="text" name="Title" /><br>
+
+    <label>Auction Description</label>
+    <input type="text" name="Description" /><br>
+
+    <label>Actual Price</label>
+    <input type="text" name="ActualPrice" /><br>
+
+    <label>Starting Date</label>
+    <input type="text" name="StartingTime" /><br>
+
+    <label>Ending Date</label>
+    <input type="text" name="EndTime" /><br>
+
+    <button type="button" id="saveBtn">Save</button>
+</form>
+
+<script>
+    $("#saveBtn").click(function () {
+        $.ajax({
+            url: "/Auctions/Create",
+            method: "post",
+            data: $("#createForm").serialize()
+        })
+            .done(function (response) {
+                debugger;
+                $("#listingArea").html(response);
+            })
+            .fail(function () { });
+    });
+</script>
