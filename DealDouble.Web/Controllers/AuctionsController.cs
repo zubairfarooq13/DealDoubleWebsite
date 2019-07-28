@@ -43,7 +43,7 @@ namespace DealDouble.Web.Controllers
         {
             AuctionService service = new AuctionService();
             var auction = service.GetAuctionByID(ID);
-            return View(auction);
+            return PartialView(auction);
         }
         
         [HttpPost]
@@ -60,7 +60,7 @@ namespace DealDouble.Web.Controllers
         {
             AuctionService service = new AuctionService();
             var auction = service.GetAuctionByID(ID);
-            return View(auction);
+            return PartialView(auction);
         }
         [HttpPost]
         public ActionResult Delete(Auction auction)

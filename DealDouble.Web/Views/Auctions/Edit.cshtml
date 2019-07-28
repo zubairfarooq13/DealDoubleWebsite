@@ -5,22 +5,39 @@
 
 <h2>Edit Existing Auction</h2>
 
-<form method="post">
-    <input type="hidden" name="ID" value="@Model.ID" />
-    <label>Auction Tite</label>
-    <input type="text" name="Title" value="@Model.Title"/><br>
+    <form id="editForm" method="post" action="/Auctions/Edit">
+        <input type="hidden" name="ID" value="@Model.ID" />
+        <label>Auction Tite</label>
+        <input type="text" name="Title" value="@Model.Title" /><br>
 
-    <label>Auction Description</label>
-    <input type="text" name="Description" value="@Model.Description" /><br>
+        <label>Auction Description</label>
+        <input type="text" name="Description" value="@Model.Description" /><br>
 
-    <label>Actual Price</label>
-    <input type="text" name="ActualPrice" value="@Model.ActualPrice" /><br>
+        <label>Actual Price</label>
+        <input type="text" name="ActualPrice" value="@Model.ActualPrice" /><br>
 
-    <label>Starting Date</label>
-    <input type="text" name="StartingTime" value="@Model.StartingTime" /><br>
+        <label>Starting Date</label>
+        <input type="text" name="StartingTime" value="@Model.StartingTime" /><br>
 
-    <label>Ending Date</label>
-    <input type="text" name="EndTime" value="@Model.EndTime" /><br>
+        <label>Ending Date</label>
+        <input type="text" name="EndTime" value="@Model.EndTime" /><br>
 
-    <button>Save</button>
-</form>
+        <button id="editBtn" type="button">Save</button>
+    </form>
+
+
+
+<script>
+    $("#editBtn").click(function () {
+
+        $.ajax({
+            url: "/Auctions/Edit",
+            method: "post",
+            data: $("#editForm").serialize()
+        })
+            .done(function (response) {
+                $("#listingArea").html(response);
+            })
+            .fail(function () { });
+    });
+</script>

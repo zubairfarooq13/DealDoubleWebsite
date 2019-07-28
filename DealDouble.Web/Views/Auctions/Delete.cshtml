@@ -3,12 +3,36 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Are you sure to Delete that Auction?</h2>
-<form method="post">
-    <input type="hidden" name="ID" value="@Model.ID" />
-    <button>Yes</button>   
+<h2>Are you sure to Delete @Model.Title Auction? </h2>
+<form id="deleteForm" method="post" action="/Auctions/Delete">
+    <input id="idField" type="hidden" name="ID" value="@Model.ID" />
+    <button id="deleteBtn" type="button">Yes</button>   
 </form>
+
 <form method="get" action="/Auctions/">
-    <button>No</button>
+    <button id="noBtn" type="button">No</button>
 </form>
+
+<script>
+    $("#deleteBtn").click(function () {
+        $.ajax({
+            url: "/Auctions/Delete",
+            method: "post",
+            data: { ID: $("#idField").attr("value") }
+        }).done(function (response) {
+            $("#listingArea").html(response);
+            })
+          .fail(function () { })
+    });
+
+    $("#noBtn").click(function () {
+        $.ajax({
+            url: "/Auctions/",
+            method: "get"
+        }).done(function (response) {
+            $("#listingArea").html(response);
+        })
+            .fail(function () { })
+    });
+</script>
 

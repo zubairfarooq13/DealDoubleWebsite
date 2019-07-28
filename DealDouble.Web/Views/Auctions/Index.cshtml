@@ -19,7 +19,9 @@
         <tbody>
             @foreach (var auction in Model)
             {
+                
                 <tr>
+                    <
                     <td>@auction.Title</td>
 
                     <td>@auction.Description</td>
@@ -30,9 +32,9 @@
 
                     <td>@auction.EndTime</td>
 
-                    <td><a href="Delete/@auction.ID">Delete</a></td>
+                    <td><button class="deleteBtn" type="button" data-id="@auction.ID">Delete</button></td>
 
-                    <td><a id="editBtn" href="Edit/@auction.ID">Edit</a></td>
+                    <td><button class="editBtn" type="button" data-id="@auction.ID">Edit</button></td>
                 </tr>
             }
         </tbody>
@@ -48,6 +50,30 @@
                 method: "get"
             }).done(function (response) {
 
+                $("#contentArea").html(response);
+            })
+        });
+
+        $(".editBtn").click(function () {
+            $.ajax({
+                url: "/Auctions/Edit",
+                method: "get",
+                data: {
+                    id: $(this).attr("data-id")
+                }
+            }).done(function (response) {
+                $("#contentArea").html(response);
+            })
+        });
+
+        $(".deleteBtn").click(function () {
+            $.ajax({
+                url: "/Auctions/Delete",
+                method: "get",
+                data: {
+                    id: $(this).attr("data-id")
+                }
+            }).done(function (response) {
                 $("#contentArea").html(response);
             })
         });
